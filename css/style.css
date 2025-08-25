@@ -9400,6 +9400,10 @@ textarea.form-control {
   color:  #8B4513;
   font-family: "Arizonia", cursive; }
 
+.heading-section p{
+  color: #000;
+}
+
 .heading-section h2 {
   font-size: 40px;
   font-weight: 600;
@@ -9418,7 +9422,7 @@ textarea.form-control {
   color: #fff; }
 
 .heading-section.heading-section-white p {
-  color: rgba(255, 255, 255, 0.9); }
+  color: rgba(255, 255, 255, 1); }
 
 .img,
 .blog-img,
