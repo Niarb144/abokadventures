@@ -9275,9 +9275,9 @@ textarea.form-control {
     font-size: 18px;
     font-weight: 600; }
   .ftco-footer .ftco-footer-widget ul li a {
-    color: rgba(0, 0, 0, 0.5); }
+    color: rgba(0, 0, 0, 1); }
     .ftco-footer .ftco-footer-widget ul li a span {
-      color: rgba(0, 0, 0, 0.1); }
+      color: rgba(0, 0, 0, 1); }
   .ftco-footer .ftco-footer-widget .btn-primary {
     background: #fff !important;
     border: 2px solid #fff !important; }
@@ -9285,9 +9285,9 @@ textarea.form-control {
       background: #fff;
       border: 2px solid #fff !important; }
   .ftco-footer p {
-    color: rgba(0, 0, 0, 0.5); }
+    color: rgba(0, 0, 0, 1); }
   .ftco-footer a {
-    color: rgba(0, 0, 0, 0.5); }
+    color: rgba(0, 0, 0, 1); }
     .ftco-footer a:hover {
       color:  #8B4513; }
   .ftco-footer .ftco-heading-2 {
@@ -9401,6 +9401,10 @@ textarea.form-control {
   font-family: "Arizonia", cursive; }
 
 .heading-section p{
+  color: #000;
+}
+
+.heading-section ul li{
   color: #000;
 }
 
