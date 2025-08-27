@@ -10112,3 +10112,54 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+     /* Floating button container */
+    .whatsapp-popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    /* WhatsApp button */
+    .whatsapp-btn {
+      background-color: #25d366;
+      color: white;
+      font-size: 28px;
+      padding: 16px;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #20b955;
+      transform: scale(1.1);
+    }
+
+    /* Popup message */
+    .popup-message {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-size: 14px;
+      color: #333;
+      display: none;
+    }
+
+    .popup-message::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      right: 20px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: white transparent transparent transparent;
+    }
