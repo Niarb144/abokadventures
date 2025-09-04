@@ -3675,6 +3675,20 @@ input[type="button"].btn-block {
   border-bottom: 2px solid #8B4513; /* optional underline effect */
 }
 
+.navbar-nav .dropdown-menu {
+  background-color: #222; /* dark background */
+  border: none;
+}
+
+.navbar-nav .dropdown-item {
+  color: #000;
+}
+
+.navbar-nav .dropdown-item:hover {
+  background-color: #8B4513; /* brand orange */
+  color: #fff;
+}
+
 
 .navbar-text {
   display: inline-block;
