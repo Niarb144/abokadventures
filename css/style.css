@@ -3669,6 +3669,13 @@ input[type="button"].btn-block {
     position: static;
     float: none; }
 
+    .navbar-nav .nav-item.active .nav-link {
+  color: #8B4513 !important;  /* your brand highlight color */
+  font-weight: 600;
+  border-bottom: 2px solid #8B4513; /* optional underline effect */
+}
+
+
 .navbar-text {
   display: inline-block;
   padding-top: 0.5rem;

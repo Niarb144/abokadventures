@@ -35,12 +35,11 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="destination.html" class="nav-link">Tours</a></li>
 					<li class="nav-item"><a href="luxurytours.html" class="nav-link">Luxury Safaris</a></li>
 					<li class="nav-item"><a href="hotel.html" class="nav-link">Accommodation</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 				</ul>
 			</div>
@@ -323,6 +322,21 @@
 			<script src="js/google-map.js"></script>
 			<script src="js/main.js"></script>
 			<script src="js/whatsapp.js"></script>
+
+			<script>
+				// Highlight active navbar link
+				document.addEventListener("DOMContentLoaded", function () {
+					const currentPath = window.location.pathname.split("/").pop(); // e.g. "about.html"
+					const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+
+					navLinks.forEach(link => {
+					const linkPath = link.getAttribute("href").split("/").pop();
+					if (linkPath === currentPath) {
+						link.parentElement.classList.add("active"); // adds active class to <li>
+					}
+					});
+				});
+			</script>
 
 </body>
 </html>
