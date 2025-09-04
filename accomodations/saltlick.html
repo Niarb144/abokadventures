@@ -35,12 +35,20 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="../index.html" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="../destination.html" class="nav-link">Tours</a></li>
+					<!-- Tours Dropdown -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="../destination.html" id="toursDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Tours
+						</a>
+						<div class="dropdown-menu" aria-labelledby="toursDropdown">
+						<a class="dropdown-item" href="../destination-kenya.html">Kenya Safaris</a>
+						<a class="dropdown-item" href="../destination-tanzania.html">Tanzania Safaris</a>
+						</div>
+					</li>
 					<li class="nav-item"><a href="../luxurytours.html" class="nav-link">Luxury Safaris</a></li>
 					<li class="nav-item"><a href="../hotel.html" class="nav-link">Accommodation</a></li>
-					<li class="nav-item"><a href="../blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
 				</ul>
 			</div>
@@ -70,7 +78,7 @@
           <h2 class="hero-title"><span>About Salt Lick Safari Lodge</span></h2>
           <p>Salt Lick Safari Lodge, located in Tsavo West National Park, is one of Kenya’s most unique safari lodges. Famous for its elevated, stilted architecture overlooking waterholes and the surrounding savannah, guests can enjoy close-up views of elephants, buffalos, and other wildlife right from their rooms and decks.</p>
           <p>The lodge offers an authentic bush experience blended with modern comfort, making it an iconic choice for safari lovers, photographers, and honeymooners seeking a truly immersive wildlife stay.</p>
-          <p><a href="#" class="btn btn-primary py-3 px-4">Book Destination</a></p>
+          <p><a href="../contact.html" class="btn btn-primary py-3 px-4">Book Destination</a></p>
         </div>
       </div>
     </div>
@@ -82,7 +90,7 @@
   <div class="container py-md-5">
     <div class="row py-md-5">
       <div class="col-md d-flex align-items-center justify-content-center">
-        <a href="../images/video/saltlick.mp4" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
+        <a href="../images/video/vid3.mp4" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
           <span class="fa fa-play"></span>
         </a>
       </div>
@@ -159,6 +167,28 @@
   </div>
 </section>
 
+        <!-- Pricing -->
+<section class="ftco-section">
+<div class="container">
+<div class="row justify-content-center mb-5 pb-3">
+<div class="col-md-7 heading-section text-center ftco-animate">
+<h2 class="mb-4">Pricing</h2>
+<p>JW Marriott Masai Mara Lodge offers premium packages tailored for different travelers, from couples to families and honeymooners.</p>
+<a href="../contact.html" class="btn btn-primary py-3 px-4">Inquire for Pricing</a>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12 ftco-animate">
+<ul>
+<!-- <li>Luxury Tented Suite – from <strong>$1,200 per night</strong></li>
+<li>Riverside Family Suite – from <strong>$1,500 per night</strong></li>
+<li>Honeymoon Suite – from <strong>$1,800 per night</strong></li> -->
+</ul>
+</div>
+</div>
+</div>
+</section>
+
 
         <section class="ftco-intro ftco-section ftco-no-pt">
 			<div class="container">
@@ -168,7 +198,7 @@
 							<div class="overlay"></div>
 							<h2>We Are Abok Adventures & Safaris</h2>
 							<p>Book your tours and safaris with us now.</p>
-							<p class="mb-0"><a href="#" class="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
+							<p class="mb-0"><a href="../contact.html" class="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
 						</div>
 					</div>
 				</div>
@@ -267,6 +297,21 @@
 			<script src="../js/google-map.js"></script>
 			<script src="../js/main.js"></script>
 			<script src="../js/whatsapp.js"></script>
+
+			<script>
+				// Highlight active navbar link
+				document.addEventListener("DOMContentLoaded", function () {
+					const currentPath = window.location.pathname.split("/").pop(); // e.g. "about.html"
+					const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+
+					navLinks.forEach(link => {
+					const linkPath = link.getAttribute("href").split("/").pop();
+					if (linkPath === currentPath) {
+						link.parentElement.classList.add("active"); // adds active class to <li>
+					}
+					});
+				});
+			</script>
 
 </body>
 </html>
