@@ -9288,8 +9288,10 @@ textarea.form-control {
     color: rgba(0, 0, 0, 1); }
   .ftco-footer a {
     color: rgba(0, 0, 0, 1); }
-    .ftco-footer a:hover {
-      color:  #8B4513; }
+    .ftco-footer .list-unstyled li a:hover {
+      color:  #8B4513; 
+      transition: all ease-in-out 0.4s;
+       }
   .ftco-footer .ftco-heading-2 {
     font-size: 17px;
     font-weight: 400;
