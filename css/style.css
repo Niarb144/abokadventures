@@ -309,7 +309,7 @@ h2, .h2 {
   font-size: 2rem; }
 
 h3, .h3 {
-  font-size: 1.75rem; }
+  font-size: 1.2rem; }
 
 h4, .h4 {
   font-size: 1.5rem; }
@@ -9053,7 +9053,8 @@ h1, h2, h3, h4, h5,
       margin-bottom: 0;
       font-weight: 500; }
       .project-wrap .text h3 a {
-        color: #000000; }
+        color: #000000;
+      font-size: 1rem; }
     .project-wrap .text ul {
       margin: 0;
       padding: 0; }
