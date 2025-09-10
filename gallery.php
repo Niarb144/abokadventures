@@ -1,13 +1,19 @@
 <?php
 $host = "localhost";
-$user = "root";     
-$pass = "";         
-$db   = "abok";
+$user = "abokadve_gallery";     
+$pass = "@SerutnevdakobA#";         
+$db   = "abokadve_gallery";
 
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 
 $result = $conn->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
+
+// Fetch all into array for JS navigation
+$files = [];
+while($row = $result->fetch_assoc()) {
+    $files[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,72 +49,110 @@ $result = $conn->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
             margin-bottom: 20px;
         }
         .gallery {
+			margin-top: 2rem;
+			margin-bottom: 2rem;
+			margin-left: 2rem;
+			margin-right: 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-auto-rows: 200px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: 260px;
             gap: 15px;
-            margin-top: 2rem;
-            margin-left: 2rem;
-            margin-right: 2rem;
-            margin-bottom: 2rem;
         }
-        .item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-        }
+        .item { position: relative; overflow: hidden; border-radius: 12px; cursor: pointer; }
         .item img, .item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;
         }
-        .item:hover img, .item:hover video {
-            transform: scale(1.1);
-        }
+        .item:hover img, .item:hover video { transform: scale(1.1); }
         .item h4 {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            margin: 0;
-            padding: 5px 10px;
-            font-size: 14px;
-            text-align: center;
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: rgba(0, 0, 0, 0.6); color: white;
+            margin: 0; padding: 5px 10px; font-size: 14px; text-align: center;
         }
 
-        /* Popup Lightbox */
+        /* Lightbox */
         .lightbox {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
             background: rgba(0,0,0,0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+            display: none; align-items: center; justify-content: center;
+            z-index: 1000; flex-direction: column;
         }
         .lightbox-content {
-            max-width: 90%;
-            max-height: 80%;
+            max-width: 76%; max-height: 70%;
         }
         .lightbox img, .lightbox video {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
+            width: 100%; height: 100%; border-radius: 10px;
         }
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 30px;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
+        .close-btn, .nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            font-size: 40px; color: white; cursor: pointer;
+            font-weight: bold; user-select: none;
         }
+        .close-btn { top: 20px; right: 30px; transform: none; font-size: 30px; }
+        .nav-btn.prev { left: 30px; }
+        .nav-btn.next { right: 30px; }
+        /* Hide Google Translate default UI */
+		.goog-te-banner-frame.skiptranslate,
+		.goog-te-gadget-icon,
+		.goog-te-menu-value,
+		.goog-logo-link,
+		.goog-te-balloon-frame {
+			display: none !important;
+		}
+	
+	
+		/* Dropdown Menu Styling */
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+	
+		.dropbtn {
+			background-color: #fff;
+			color: #333;
+			font-weight: bold;
+			padding: 8px 12px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			gap: 5px;
+		}
+	
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #fff;
+			min-width: 160px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			z-index: 1;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+		}
+	
+		.dropdown-content a {
+			color: #333;
+			padding: 8px 12px;
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			transition: background 0.3s ease;
+		}
+	
+		.dropdown-content a:hover {
+			background-color: #f1f1f1;
+		}
+	
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+	
+		.dropdown img {
+			width: 20px;
+			border-radius: 3px;
+		}
     </style>
 </head>
 <body>
@@ -138,6 +182,27 @@ $result = $conn->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
                     <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 				</ul>
+
+                <!-- Hidden Google Translate widget -->
+				<div id="google_translate_element" style="display:none;"></div>
+				
+				<!-- Dropdown Language Switcher -->
+				<div class="dropdown">
+					<button class="dropbtn">
+						🌐 Language
+					</button>
+					<div class="dropdown-content">
+						<a href="#" onclick="translateLanguage('en')"><img src="https://flagcdn.com/w20/gb.png"> English</a>
+						<a href="#" onclick="translateLanguage('fr')"><img src="https://flagcdn.com/w20/fr.png"> Français</a>
+						<a href="#" onclick="translateLanguage('es')"><img src="https://flagcdn.com/w20/es.png"> Español</a>
+						<a href="#" onclick="translateLanguage('de')"><img src="https://flagcdn.com/w20/de.png"> Deutsch</a>
+						<a href="#" onclick="translateLanguage('ru')"><img src="https://flagcdn.com/w20/ru.png"> Русский</a>
+						<a href="#" onclick="translateLanguage('ja')"><img src="https://flagcdn.com/w20/jp.png"> 日本語</a>
+						<a href="#" onclick="translateLanguage('zh-CN')"><img src="https://flagcdn.com/w20/cn.png"> 中文 (简体)</a>
+						<a href="#" onclick="translateLanguage('zh-TW')"><img src="https://flagcdn.com/w20/tw.png"> 中文 (繁體)</a>
+						<a href="#" onclick="translateLanguage('sw')"><img src="https://flagcdn.com/w20/tz.png"> Kiswahili</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -157,8 +222,8 @@ $result = $conn->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
 
     
     <div class="gallery">
-        <?php while($row = $result->fetch_assoc()): ?>
-            <div class="item" onclick="openLightbox('<?php echo $row['file_path']; ?>','<?php echo $row['file_type']; ?>')">
+        <?php foreach ($files as $index => $row): ?>
+            <div class="item" onclick="openLightbox(<?php echo $index; ?>)">
                 <?php if ($row['file_type'] === "image"): ?>
                     <img src="<?php echo $row['file_path']; ?>" alt="">
                 <?php else: ?>
@@ -168,13 +233,15 @@ $result = $conn->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
                 <?php endif; ?>
                 
             </div>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </div>
 
-    <!-- Lightbox Popup -->
+    <!-- Lightbox -->
     <div id="lightbox" class="lightbox">
         <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <span class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</span>
         <div id="lightbox-content" class="lightbox-content"></div>
+        <span class="nav-btn next" onclick="changeSlide(1)">&#10095;</span>
     </div>
 
     <footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(images/bg_3.jpg);">
@@ -251,6 +318,28 @@ $result = $conn->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
 			<!-- loader -->
 			<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+            <!-- Google Translate -->
+			<script type="text/javascript">
+				function googleTranslateElementInit() {
+				new google.translate.TranslateElement(
+					{
+					pageLanguage: 'en',
+					includedLanguages: 'fr,es,de,it,sw,zh-CN,zh-TW,ru,ja'
+					},
+					'google_translate_element'
+				);
+				}
+	
+				function translateLanguage(lang) {
+				var selectField = document.querySelector("select.goog-te-combo");
+				if (selectField) {
+					selectField.value = lang;
+					selectField.dispatchEvent(new Event("change"));
+				}
+				}
+			</script>
+			
+			<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 			<script src="https://kit.fontawesome.com/885a9fc41f.js" crossorigin="anonymous"></script>
 			<script src="js/jquery.min.js"></script>
@@ -285,15 +374,31 @@ $result = $conn->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
 				});
 			</script>
 
-    <script>
-        function openLightbox(filePath, fileType) {
-            const content = document.getElementById("lightbox-content");
-            if (fileType === "image") {
-                content.innerHTML = `<img src="${filePath}" alt="">`;
-            } else {
-                content.innerHTML = `<video controls autoplay><source src="${filePath}" type="video/mp4"></video>`;
-            }
+        <script>
+        const files = <?php echo json_encode($files); ?>;
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            showSlide(currentIndex);
             document.getElementById("lightbox").style.display = "flex";
+        }
+
+        function showSlide(index) {
+            const content = document.getElementById("lightbox-content");
+            const file = files[index];
+            if (file.file_type === "image") {
+                content.innerHTML = `<img src="${file.file_path}" alt="">`;
+            } else {
+                content.innerHTML = `<video controls autoplay><source src="${file.file_path}" type="video/mp4"></video>`;
+            }
+        }
+
+        function changeSlide(step) {
+            currentIndex += step;
+            if (currentIndex < 0) currentIndex = files.length - 1;
+            if (currentIndex >= files.length) currentIndex = 0;
+            showSlide(currentIndex);
         }
 
         function closeLightbox() {
@@ -304,6 +409,15 @@ $result = $conn->query("SELECT * FROM gallery ORDER BY uploaded_at DESC");
         // Close lightbox on click outside
         document.getElementById("lightbox").addEventListener("click", function(e) {
             if (e.target === this) closeLightbox();
+        });
+
+        // Keyboard navigation
+        document.addEventListener("keydown", function(e) {
+            if (document.getElementById("lightbox").style.display === "flex") {
+                if (e.key === "ArrowRight") changeSlide(1);
+                if (e.key === "ArrowLeft") changeSlide(-1);
+                if (e.key === "Escape") closeLightbox();
+            }
         });
     </script>
 </body>
