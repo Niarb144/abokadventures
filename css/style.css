@@ -64,95 +64,6 @@ body {
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important; }
 
-/* Overlay background */
-.ad-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: none;
-  /* hidden by default */
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-/* Popup box */
-.ad-popup {
-  background: #fff;
-  width: 420px;
-  max-width: 90%;
-  max-height: 600px;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  position: relative;
-  animation: fadeIn 0.4s ease;
-  scroll-behavior: smooth;
-}
-
-/* Close button */
-.ad-popup .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #333;
-  cursor: pointer;
-}
-
-/* Example banner content */
-.ad-popup img {
-  max-width: 100%;
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
-
-.ad-popup h2 {
-  margin: 10px 0;
-  color: #8B4513;
-}
-
-.ad-popup p {
-  margin: 10px 0;
-  color: #555;
-}
-
-.ad-popup a {
-  position: absolute;
-  bottom: 1%;
-  left: 1%;
-  margin-top: 15px;
-  padding: 4px 10px;
-  background: #8B4513;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.ad-popup a:hover {
-  background: #cf711f;
-  color: white;
-}
-
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
 hr {
   -webkit-box-sizing: content-box;
@@ -10237,8 +10148,8 @@ textarea.form-control {
      /* Floating button container */
     .whatsapp-popup {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 100px;
+      right: 10px;
       z-index: 1000;
     }
 
